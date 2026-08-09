@@ -26,11 +26,8 @@ resource "aws_iam_role" "app_role" {
 }
 
 #
-# App policy: least-privilege access to the app bucket only.
-# - No s3:* — just the actions the app actually needs.
-# - Scoped to this bucket's ARN, not "*". If the role is ever compromised,
-#   blast radius is one bucket, not the whole account.
-# - No DeleteObject. The app reads and writes, it doesn't need to delete.
+# Scoped to this bucket's ARN only, no DeleteObject — if this role
+# is ever compromised, blast radius is one bucket, not the account
 #
 
 data "aws_iam_policy_document" "s3_access" {
@@ -56,7 +53,7 @@ data "aws_iam_policy_document" "s3_access" {
 
 resource "aws_iam_policy" "s3_access" {
   name        = "${var.project_name}-s3-access-policy"
-  description = "Least-privilege S3 access: list + get/put only, no delete, no wildcard resources."
+  description = "Least-privilege S3 access: list + get/put only"
   policy      = data.aws_iam_policy_document.s3_access.json
 }
 
@@ -66,8 +63,7 @@ resource "aws_iam_role_policy_attachment" "s3_access" {
 }
 
 #
-# Instance profile: the wrapper that lets an EC2 instance actually assume
-# an IAM role. No instance profile, no role, even if the role exists.
+# Wrapper that lets the EC2 instance actually assume the role above
 #
 
 resource "aws_iam_instance_profile" "app_profile" {

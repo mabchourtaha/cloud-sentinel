@@ -20,8 +20,7 @@ resource "aws_s3_bucket_versioning" "app_bucket" {
 }
 
 #
-# Default encryption (SSE-S3). Everything written here gets encrypted
-# at rest, even if the app forgets to ask for it on upload.
+# Encrypted at rest by default, even if the app forgets to ask for it
 #
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "app_bucket" {
