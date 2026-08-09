@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars and fill in your values.
+# terraform.tfvars is gitignored — never gets committed.
+
+# Your public IP, /32. curl ifconfig.me
+ssh_allowed_cidr = "REPLACE_WITH_YOUR_IP/32"
+
+# Has to be globally unique across all of S3, not just your account
+bucket_suffix = "REPLACE_WITH_A_UNIQUE_SUFFIX"
