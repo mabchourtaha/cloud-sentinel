@@ -29,3 +29,7 @@ variable "ssh_allowed_cidr" {
   description = "Your IP in /32 format, never 0.0.0.0/0"
   type        = string
 }
+
+variable "key_name" {
+  type = string
+}

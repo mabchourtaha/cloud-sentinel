@@ -52,6 +52,8 @@ module "compute" {
   subnet_id             = module.networking.public_subnet_id
   instance_profile_name = module.iam.instance_profile_name
   ssh_allowed_cidr      = var.ssh_allowed_cidr
+  key_name = "cloud-sentinel-key"
+
 }
 
 
