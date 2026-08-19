@@ -3,6 +3,8 @@
 #
 
 resource "aws_vpc" "main" {
+  #checkov:skip=CKV2_AWS_11:VPC Flow Logs are a future improvement, out of scope for this MVP
+  #checkov:skip=CKV2_AWS_12:Default SG unused, no resources attached to it
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
   enable_dns_hostnames = true
@@ -31,6 +33,7 @@ resource "aws_internet_gateway" "main" {
 #
 
 resource "aws_subnet" "public" {
+  #checkov:skip=CKV_AWS_130:Public subnet by design, IPs are meant to be public
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnet_cidr
   availability_zone       = var.availability_zone

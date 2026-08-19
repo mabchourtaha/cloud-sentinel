@@ -51,9 +51,11 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "aws_instance" "app" {
+  #checkov:skip=CKV_AWS_135:t3.micro is EBS-optimized by default
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
+  monitoring             = true
   vpc_security_group_ids = [aws_security_group.app_sg.id]
   iam_instance_profile   = var.instance_profile_name
   key_name               = var.key_name

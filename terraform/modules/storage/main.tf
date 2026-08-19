@@ -1,4 +1,9 @@
 resource "aws_s3_bucket" "app_bucket" {
+  #checkov:skip=CKV_AWS_144:Single-region MVP, no replication needed
+  #checkov:skip=CKV_AWS_18:Would need a second bucket, out of scope for this MVP
+  #checkov:skip=CKV_AWS_145:SSE-S3 used instead of KMS for this MVP, no key management overhead
+  #checkov:skip=CKV2_AWS_62:No downstream consumer for event notifications
+  #checkov:skip=CKV2_AWS_61:Lifecycle policy is a future improvement
   bucket        = "${var.project_name}-app-${var.bucket_suffix}"
   force_destroy = true
 

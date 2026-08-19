@@ -58,6 +58,8 @@ module "compute" {
 
 
 resource "aws_cloudwatch_log_group" "app_logs" {
+  #checkov:skip=CKV_AWS_338:30-day retention is enough for this MVP
+  #checkov:skip=CKV_AWS_158:Default CloudWatch encryption used instead of KMS for this MVP
   name              = "/cloud-sentinel/${var.project_name}/app"
   retention_in_days = 30
 
@@ -139,6 +141,9 @@ resource "aws_s3_bucket_policy" "cloudtrail" {
 # when" record you'd need to investigate an incident
 
 resource "aws_cloudtrail" "main" {
+  #checkov:skip=CKV_AWS_35:SSE-S3 used instead of KMS for this MVP
+  #checkov:skip=CKV_AWS_252:No alerting pipeline set up for this project
+  #checkov:skip=CKV2_AWS_10:CloudWatch Logs integration is a future improvement
   name                          = "${var.project_name}-trail"
   s3_bucket_name                = module.storage.bucket_name
   s3_key_prefix                 = "cloudtrail"
