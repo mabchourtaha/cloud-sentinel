@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "app_bucket" {
-  bucket = "${var.project_name}-app-${var.bucket_suffix}"
+  bucket        = "${var.project_name}-app-${var.bucket_suffix}"
   force_destroy = true
 
   tags = {

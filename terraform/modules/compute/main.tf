@@ -57,7 +57,7 @@ resource "aws_instance" "app" {
   vpc_security_group_ids = [aws_security_group.app_sg.id]
   iam_instance_profile   = var.instance_profile_name
   key_name               = var.key_name
-  
+
   root_block_device {
     encrypted   = true
     volume_size = 30

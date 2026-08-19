@@ -8,10 +8,10 @@ terraform {
     }
   }
 
-  
+
   # Local state for this MVP — remote backend (S3 + DynamoDB lock)
   # is a documented future improvement, not done here on purpose.
-  
+
 }
 
 provider "aws" {
@@ -52,7 +52,7 @@ module "compute" {
   subnet_id             = module.networking.public_subnet_id
   instance_profile_name = module.iam.instance_profile_name
   ssh_allowed_cidr      = var.ssh_allowed_cidr
-  key_name = "cloud-sentinel-key"
+  key_name              = "cloud-sentinel-key"
 
 }
 
